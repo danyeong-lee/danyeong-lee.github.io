@@ -1,0 +1,9 @@
+title: Danyeong Lee
+email: ""
+description: >-
+  AI, product, and career stories.
+baseurl: ""
+url: "https://danyeong-lee.github.io"
+theme: minima
+plugins:
+  - jekyll-feed
