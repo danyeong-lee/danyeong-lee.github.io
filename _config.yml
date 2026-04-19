@@ -1,9 +1,41 @@
 title: Danyeong Lee
 email: ""
 description: >-
-  AI, product, and career stories.
+  Notes on AI research — drug discovery, protein models,
+  and LLM interpretability.
 baseurl: ""
 url: "https://danyeong-lee.github.io"
+lang: en
+timezone: Asia/Seoul
+
 theme: minima
+minima:
+  skin: auto
+
+header_pages:
+  - about.md
+
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: false
+
+permalink: /:year/:month/:day/:title/
+
+show_excerpts: true
+
+exclude:
+  - README.md
+  - docs/
+  - .github/
+  - Gemfile
+  - Gemfile.lock
+  - vendor/

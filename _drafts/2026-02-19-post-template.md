@@ -1,20 +1,20 @@
 ---
 layout: post
-title: "[초안] 제목을 입력해줘"
-date: 2026-02-19 22:45:00 +0900
-categories: [ai, career]
-tags: [template]
-excerpt: "한 줄 요약"
+title: "[Draft] Title"
+date: 2026-01-01 09:00:00 +0900
+categories: [research]
+tags: []
+excerpt: "One-line summary"
 ---
 
-## 한 줄 훅
+## TL;DR
 
-## 배경과 문제정의
+## Background
 
-## 접근 방법
+## Approach
 
-## 실험/검증
+## Experiments
 
-## 결과
+## Results
 
-## 회고
+## Takeaways
