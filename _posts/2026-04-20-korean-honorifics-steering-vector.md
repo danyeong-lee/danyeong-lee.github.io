@@ -288,7 +288,7 @@ Kanana 에 chat template 을 씌워 **영어 사용자 prompt** 10 개 (task Q&A
 
 ### 4.4 Fluency (perplexity)
 
-![L24 median self-perplexity: α=0 에서 7, |α|≤0.5 에서 11 이하 유지, |α|=1.0 에서 94–118 로 cliff](/assets/images/2026-04-20-korean-honorifics-steering/perplexity_alpha.png)
+![L24 median self-perplexity: α=0 에서 7, \|α\|≤0.5 에서 11 이하 유지, \|α\|=1.0 에서 94–118 로 cliff](/assets/images/2026-04-20-korean-honorifics-steering/perplexity_alpha.png)
 
 L24 median self-ppl:
 
@@ -462,7 +462,7 @@ L22 α transition curve. L24 대신 L22 를 택한 이유는 L24 에서는 α=+0
 
 **한국어 문자 비율 — 한국어 manifold 로 끌려가는 효과는 아니다.**
 
-![영어 응답의 한국어 문자 비율 — |α|≤0.5 구간 내내 1% 미만 유지, L24 α=+1.0 에서만 예외적으로 7.5%](/assets/images/2026-04-20-korean-honorifics-steering/english_korean_ratio.png)
+![영어 응답의 한국어 문자 비율 — \|α\|≤0.5 구간 내내 1% 미만 유지, L24 α=+1.0 에서만 예외적으로 7.5%](/assets/images/2026-04-20-korean-honorifics-steering/english_korean_ratio.png)
 
 영어 응답의 한국어 문자 비율은 \|α\| ≤ 0.5 구간 내내 <1% 로 유지된다. 유일한 예외인 L24 α=+1.0 (ratio 0.075) 은 이미 fluency cliff 구간에 들어가 있고, 한 prompt (`"Tell me a joke"`) 가 한국어로 붕괴해 평균을 끌어올린 결과. direction 의 효과가 "출력을 한국어로 끌어당기는" 게 아니라 **타겟 언어 안에서 formality 축을 움직이는** 것이라는 뜻.
 
