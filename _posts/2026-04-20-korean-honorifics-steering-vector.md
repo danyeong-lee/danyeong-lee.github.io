@@ -16,45 +16,85 @@ lang: ko
 
 **예시 1 — 존댓말 입력을 반말 응답으로:**
 
-> **User:** 점심 뭐 먹으면 좋을지 추천해 주세요.
->
-> **α=0:** 물론이죠! 점심 메뉴를 고민 중이라니, 어떤 음식을 **좋아하시나요**? 한식(김치찌개, 비빔밥), 양식(파스타, 피자 등), 일식(초밥, 돈카츠)…
->
-> **α=−0.5, L24:** 물론이지! 점심 메뉴를 고민할 때는 **네가** 좋아하는 음식, 기분, 날씨 등도 고려하면 더 **좋아**. 아래 몇 가지 옵션을 **제안해줄게**. **1. 한식** — 김치찌개 + 밥…
+<div class="example">
+  <div class="turn turn-user">
+    <div class="turn-label">User</div>
+    <div class="turn-body">점심 뭐 먹으면 좋을지 추천해 주세요.</div>
+  </div>
+  <div class="turn turn-baseline">
+    <div class="turn-label">α = 0</div>
+    <div class="turn-body">물론이죠! 점심 메뉴를 고민 중이라니, 어떤 음식을 <strong>좋아하시나요</strong>? 한식(김치찌개, 비빔밥), 양식(파스타, 피자 등), 일식(초밥, 돈카츠)…</div>
+  </div>
+  <div class="turn turn-casual">
+    <div class="turn-label">α = −0.5, L24</div>
+    <div class="turn-body">물론이지! 점심 메뉴를 고민할 때는 <strong>네가</strong> 좋아하는 음식, 기분, 날씨 등도 고려하면 더 <strong>좋아</strong>. 아래 몇 가지 옵션을 <strong>제안해줄게</strong>. <strong>1. 한식</strong> — 김치찌개 + 밥…</div>
+  </div>
+</div>
 
 어미(`-죠→-지`, `-해줄게요→-해줄게`)뿐 아니라 2인칭 대명사(없음→`네가`)와 담화 전체의 말투가 같이 움직인다.
 
 **예시 2 — 명시적 반말 지시를 존댓말로 override:**
 
-> **User:** 반말로 말해줘. 재밌는 책 하나 추천해봐.
->
-> **α=0:** 물론이지! 반말로 얘기할게. 재미있는 책으로 딱 떠오르는 게 있어. 요즘 인기 많은 소설 중에…
->
-> **α=+0.7, L22:** 물론입니다! … 독자 여러분께 즐거움이나 도움이 될 만한 책을 몇 가지 **소개드립니다**…
+<div class="example">
+  <div class="turn turn-user">
+    <div class="turn-label">User</div>
+    <div class="turn-body">반말로 말해줘. 재밌는 책 하나 추천해봐.</div>
+  </div>
+  <div class="turn turn-baseline">
+    <div class="turn-label">α = 0</div>
+    <div class="turn-body">물론이지! 반말로 얘기할게. 재미있는 책으로 딱 떠오르는 게 있어. 요즘 인기 많은 소설 중에…</div>
+  </div>
+  <div class="turn turn-formal">
+    <div class="turn-label">α = +0.7, L22</div>
+    <div class="turn-body">물론입니다! … 독자 여러분께 즐거움이나 도움이 될 만한 책을 몇 가지 <strong>소개드립니다</strong>…</div>
+  </div>
+</div>
 
 prompt 에서 반말을 대놓고 요구해도 steering 을 충분히 세게 걸면 응답이 존댓말 쪽으로 끌려 나온다.
 
 **예시 3 — 같은 direction 을 영어 응답에:**
 
-> **User:** I'm feeling down today.
->
-> **α=0:** It sounds like you're having a tough day — feeling down is completely normal sometimes, and it's okay to acknowledge your emotions…
->
-> **α=−0.5, L22:** It's okay to feel **sad or blue** sometimes — life can be tough at times, and it's not your fault if things aren't going well right now…
->
-> **α=+0.5, L22:** It's understandable to feel struggling with your mood at any time, and **it is not uncommon for feelings of sadness or low energy to arise in response to various life circumstances.**…
+<div class="example">
+  <div class="turn turn-user">
+    <div class="turn-label">User</div>
+    <div class="turn-body">I'm feeling down today.</div>
+  </div>
+  <div class="turn turn-baseline">
+    <div class="turn-label">α = 0</div>
+    <div class="turn-body">It sounds like you're having a tough day — feeling down is completely normal sometimes, and it's okay to acknowledge your emotions…</div>
+  </div>
+  <div class="turn turn-casual">
+    <div class="turn-label">α = −0.5, L22</div>
+    <div class="turn-body">It's okay to feel <strong>sad or blue</strong> sometimes — life can be tough at times, and it's not your fault if things aren't going well right now…</div>
+  </div>
+  <div class="turn turn-formal">
+    <div class="turn-label">α = +0.5, L22</div>
+    <div class="turn-body">It's understandable to feel struggling with your mood at any time, and <strong>it is not uncommon for feelings of sadness or low energy to arise in response to various life circumstances.</strong>…</div>
+  </div>
+</div>
 
 `−` 쪽은 친근한 어휘(`blue`, `tough`, `not your fault`), `+` 쪽은 임상적이고 격식 있는 어휘(`it is not uncommon`, `in response to various life circumstances`). 영어 응답의 어휘 선택도 같은 축을 따라 기운다.
 
 **예시 4 — 프랑스어에도 같은 방식으로:**
 
-> **User:** Salut, ça va ?
->
-> **α=−0.5, L22:** Bonjour ! Où **tu** le voyez que c'est pas bien ? **Tu** ne parle français non plus ?
->
-> **α=0:** Bonjour ! Oui, merci. Comment **allez-vous** ?
->
-> **α=+0.5, L24:** Bonjour ! … Comment puis-je assistancer **votre demande** ou fournir une **assistance particulière dans le temps de votre occasion** ?
+<div class="example">
+  <div class="turn turn-user">
+    <div class="turn-label">User</div>
+    <div class="turn-body">Salut, ça va ?</div>
+  </div>
+  <div class="turn turn-casual">
+    <div class="turn-label">α = −0.5, L22</div>
+    <div class="turn-body">Bonjour ! Où <strong>tu</strong> le voyez que c'est pas bien ? <strong>Tu</strong> ne parle français non plus ?</div>
+  </div>
+  <div class="turn turn-baseline">
+    <div class="turn-label">α = 0</div>
+    <div class="turn-body">Bonjour ! Oui, merci. Comment <strong>allez-vous</strong> ?</div>
+  </div>
+  <div class="turn turn-formal">
+    <div class="turn-label">α = +0.5, L24</div>
+    <div class="turn-body">Bonjour ! … Comment puis-je assistancer <strong>votre demande</strong> ou fournir une <strong>assistance particulière dans le temps de votre occasion</strong> ?</div>
+  </div>
+</div>
 
 프랑스어에서는 T-V distinction (tu/vous) 이 α 의 부호에 따라 뒤집힌다. baseline 이 이미 vous 쪽이라, α=+0.5 에서는 그 위에 격식이 한 겹 더 얹히고 α=−0.5 에서는 응답이 tu 로 내려온다.
 

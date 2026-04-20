@@ -138,7 +138,7 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 
 // ---------- Blockquote ----------
 blockquote {
-  color: inherit;
+  color: #1a1d23;              // explicit — avoid minima's grey fade
   font-style: normal;
   font-size: 1rem;
   padding: 0.8em 1em;
@@ -150,6 +150,56 @@ blockquote {
   > :last-child  { margin-bottom: 0; }
   p { margin-bottom: 0.6em; }
   p:last-child { margin-bottom: 0; }
+}
+
+// ---------- Dialogue / example block ----------
+// Used for multi-turn examples (User / α=0 / α=±0.5 …)
+// Markup:
+//   <div class="example">
+//     <div class="turn turn-user">
+//       <div class="turn-label">User</div>
+//       <div class="turn-body">…</div>
+//     </div>
+//     <div class="turn turn-baseline">…</div>
+//     <div class="turn turn-casual">…</div>
+//     <div class="turn turn-formal">…</div>
+//   </div>
+.example {
+  color: #1a1d23;
+  background: $blockquote-bg-light;
+  border: 1px solid $rule-light;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1.6em 0;
+
+  .turn {
+    padding: 0.85em 1.1em;
+    border-bottom: 1px solid $rule-light;
+    &:last-child { border-bottom: 0; }
+  }
+  .turn-label {
+    display: inline-block;
+    font-family: $mono-font;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 0.2em 0.6em;
+    border-radius: 4px;
+    margin-bottom: 0.45em;
+    background: rgba(0, 0, 0, 0.06);
+    color: rgba(0, 0, 0, 0.72);
+    white-space: nowrap;
+  }
+  .turn-body {
+    margin: 0;
+    line-height: 1.7;
+    color: inherit;
+  }
+
+  .turn-user     .turn-label { background: rgba(0, 0, 0, 0.055); color: rgba(0, 0, 0, 0.65); }
+  .turn-baseline .turn-label { background: rgba(0, 0, 0, 0.08);  color: rgba(0, 0, 0, 0.78); }
+  .turn-casual   .turn-label { background: rgba(56, 189, 248, 0.18); color: #0369a1; }
+  .turn-formal   .turn-label { background: rgba(249, 115, 22, 0.18); color: #b54708; }
 }
 
 // ---------- Images / figures ----------
@@ -204,8 +254,22 @@ svg.blog-chart, figure.blog-chart svg {
   tbody tr:nth-child(even) td { background: $table-stripe-dark; }
 
   blockquote {
+    color: #e6e8ef;
     background: $blockquote-bg-dark;
     border-left-color: $blockquote-border-dark;
+  }
+
+  .example {
+    color: #e6e8ef;
+    background: $blockquote-bg-dark;
+    border-color: $rule-dark;
+
+    .turn { border-bottom-color: $rule-dark; }
+    .turn-label { background: rgba(255, 255, 255, 0.07); color: rgba(255, 255, 255, 0.78); }
+    .turn-user     .turn-label { background: rgba(255, 255, 255, 0.06); color: rgba(255, 255, 255, 0.72); }
+    .turn-baseline .turn-label { background: rgba(255, 255, 255, 0.09); color: rgba(255, 255, 255, 0.86); }
+    .turn-casual   .turn-label { background: rgba(56, 189, 248, 0.22);  color: #7dd3fc; }
+    .turn-formal   .turn-label { background: rgba(249, 115, 22, 0.22);  color: #fdba74; }
   }
 
   hr { border-top-color: $rule-dark; }
