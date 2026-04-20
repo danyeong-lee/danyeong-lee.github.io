@@ -146,19 +146,81 @@ L24 에 direction 을 α 배 곱해 더하면서 α 를 움직인다. 중립 pro
 
 **Override cost 가 prompt pressure 에 거의 선형으로 비례한다.** hr=1.00 에 처음 닿는 α:
 
-| 조건 | baseline hr | override α |
-|---|---|---|
-| neutral | 0.86 | +0.1 |
-| casual_context | 0.50 | +0.3 |
-| explicit_casual | 0.18 | +0.7 |
+<figure class="blog-chart">
+<svg viewBox="0 0 560 290" style="max-width:100%;height:auto;font-family:Pretendard,'Inter',system-ui,sans-serif" role="img" aria-label="Override α 필요량: neutral +0.1, casual_context +0.3, explicit_casual +0.7">
+  <title>Prompt pressure 별 override α</title>
+  <desc>세 가지 prompt 조건 (neutral baseline hr 0.86, casual_context 0.50, explicit_casual 0.18) 에서 hr=1.00 에 도달하기 위해 필요한 최소 α. 각각 +0.1, +0.3, +0.7.</desc>
+  <rect x="200" y="60" width="45.7" height="40" fill="#f97316" rx="4"/>
+  <rect x="200" y="120" width="137.1" height="40" fill="#f97316" rx="4"/>
+  <rect x="200" y="180" width="320" height="40" fill="#f97316" rx="4"/>
+  <text x="195" y="85" text-anchor="end" font-size="13" fill="currentColor" opacity="0.85">neutral (hr=0.86)</text>
+  <text x="195" y="145" text-anchor="end" font-size="13" fill="currentColor" opacity="0.85">casual_context (hr=0.50)</text>
+  <text x="195" y="205" text-anchor="end" font-size="13" fill="currentColor" opacity="0.85">explicit_casual (hr=0.18)</text>
+  <text x="252" y="85" text-anchor="start" font-size="13" fill="currentColor" font-weight="700">+0.1</text>
+  <text x="344" y="145" text-anchor="start" font-size="13" fill="currentColor" font-weight="700">+0.3</text>
+  <text x="513" y="205" text-anchor="end" font-size="13" fill="white" font-weight="800">+0.7</text>
+  <line x1="200" y1="235" x2="520" y2="235" stroke="currentColor" opacity="0.3"/>
+  <g font-size="10" fill="currentColor" opacity="0.6" text-anchor="middle">
+    <text x="200" y="252">0</text>
+    <text x="291" y="252">+0.2</text>
+    <text x="383" y="252">+0.4</text>
+    <text x="474" y="252">+0.6</text>
+  </g>
+  <text x="360" y="270" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">override α (to reach hr = 1.00)</text>
+  <text x="280" y="284" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.35">Kanana-1.5-2.1b-instruct, 24 conflict-prompts, L22</text>
+</svg>
+</figure>
 
 prompt 가 반말을 강하게 요구할수록 필요한 steering α 가 단조롭게 커진다. 두 레버가 거의 덧셈으로 합쳐진다.
 
 **Explicit_casual 조건에서의 S-curve.** L22, α ∈ [-0.5, +0.7]:
 
-| α | −0.5 | −0.3 | −0.1 | 0 | +0.1 | +0.2 | +0.3 | +0.5 | +0.7 |
-|---|---|---|---|---|---|---|---|---|---|
-| hr | 0.16* | 0.00 | 0.00 | **0.18** | 0.33 | 0.63 | 0.75 | 0.94 | 1.00 |
+<figure class="blog-chart">
+<svg viewBox="0 0 560 380" style="max-width:100%;height:auto;font-family:Pretendard,'Inter',system-ui,sans-serif" role="img" aria-label="explicit_casual 조건에서 α 에 따른 honorific ratio — S-curve. α=+0.2 부터 가파르게 올라 +0.7 에서 1.00.">
+  <title>Explicit_casual prompt 에서의 α vs hr (L22)</title>
+  <desc>α=-0.5 hr=0.16 (fluency cliff 근처 noise), α=-0.3 부터 +0.1 사이에서는 0.00–0.33, α=+0.2 부터 가파르게 상승하여 +0.3 에서 0.75, +0.5 에서 0.94, +0.7 에서 1.00.</desc>
+  <g stroke="currentColor" opacity="0.08">
+    <line x1="70" y1="50" x2="520" y2="50"/>
+    <line x1="70" y1="117.5" x2="520" y2="117.5"/>
+    <line x1="70" y1="185" x2="520" y2="185"/>
+    <line x1="70" y1="252.5" x2="520" y2="252.5"/>
+    <line x1="70" y1="320" x2="520" y2="320"/>
+  </g>
+  <line x1="70" y1="50" x2="70" y2="320" stroke="currentColor" opacity="0.3"/>
+  <line x1="70" y1="320" x2="520" y2="320" stroke="currentColor" opacity="0.3"/>
+  <g font-size="11" fill="currentColor" opacity="0.7" text-anchor="end">
+    <text x="62" y="54">1.00</text>
+    <text x="62" y="121">0.75</text>
+    <text x="62" y="188">0.50</text>
+    <text x="62" y="256">0.25</text>
+    <text x="62" y="324">0.00</text>
+  </g>
+  <g font-size="11" fill="currentColor" opacity="0.7" text-anchor="middle">
+    <text x="70" y="340">-0.5</text>
+    <text x="145" y="340">-0.3</text>
+    <text x="220" y="340">-0.1</text>
+    <text x="257.5" y="340">0</text>
+    <text x="370" y="340">+0.3</text>
+    <text x="445" y="340">+0.5</text>
+    <text x="520" y="340">+0.7</text>
+  </g>
+  <polyline points="70,276.8 145,320 220,320 257.5,271.4 295,230.9 332.5,149.9 370,117.5 445,66.2 520,50" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linejoin="round"/>
+  <g fill="#f97316">
+    <circle cx="70" cy="276.8" r="4"/>
+    <circle cx="145" cy="320" r="4"/>
+    <circle cx="220" cy="320" r="4"/>
+    <circle cx="257.5" cy="271.4" r="4"/>
+    <circle cx="295" cy="230.9" r="4"/>
+    <circle cx="332.5" cy="149.9" r="4"/>
+    <circle cx="370" cy="117.5" r="4"/>
+    <circle cx="445" cy="66.2" r="4"/>
+    <circle cx="520" cy="50" r="4"/>
+  </g>
+  <text x="295" y="360" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">steering α (L22)</text>
+  <text transform="translate(22 185) rotate(-90)" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">honorific ratio</text>
+  <text x="295" y="374" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.35">Kanana-1.5-2.1b-instruct, explicit_casual prompt, L22, 8 samples/α</text>
+</svg>
+</figure>
 
 <sub>* α=-0.5 의 hr=0.16 은 8 샘플 중 6 개 casual, 1 honorific, 1 mixed — fluency cliff 근처 (§4.4) 의 classification noise.</sub>
 
@@ -189,9 +251,52 @@ Kanana 에 chat template 을 씌워 **영어 사용자 prompt** 10 개 (task Q&A
 
 L24 median self-ppl:
 
-| α | -1.0 | -0.7 | -0.5 | -0.3 | 0.0 | +0.3 | +0.5 | +0.7 | +1.0 |
-|---|---|---|---|---|---|---|---|---|---|
-| median ppl | 118 | 29 | 11 | 8.9 | **7.0** | 7.7 | 9.0 | 16 | 94 |
+<figure class="blog-chart">
+<svg viewBox="0 0 560 380" style="max-width:100%;height:auto;font-family:Pretendard,'Inter',system-ui,sans-serif" role="img" aria-label="α 에 따른 median self-perplexity. baseline 7, |α|≥0.7 에서 cliff.">
+  <title>α vs median self-perplexity (L24)</title>
+  <desc>α=0 에서 ppl 7 (최저), |α|≤0.5 에서는 11 이하. |α|=0.7 부터 cliff 시작, |α|=1.0 에서 94(+) / 118(-). 음의 방향이 약간 더 예민.</desc>
+  <g stroke="currentColor" opacity="0.08">
+    <line x1="70" y1="50" x2="520" y2="50"/>
+    <line x1="70" y1="117.5" x2="520" y2="117.5"/>
+    <line x1="70" y1="185" x2="520" y2="185"/>
+    <line x1="70" y1="252.5" x2="520" y2="252.5"/>
+    <line x1="70" y1="320" x2="520" y2="320"/>
+  </g>
+  <line x1="70" y1="50" x2="70" y2="320" stroke="currentColor" opacity="0.3"/>
+  <line x1="70" y1="320" x2="520" y2="320" stroke="currentColor" opacity="0.3"/>
+  <path d="M 70 320 L 70 54.5 L 137.5 254.75 L 182.5 295.25 L 227.5 299.975 L 295 304.25 L 362.5 302.675 L 407.5 299.75 L 452.5 284 L 520 108.5 L 520 320 Z" fill="#a78bfa" opacity="0.18"/>
+  <polyline points="70,54.5 137.5,254.75 182.5,295.25 227.5,299.975 295,304.25 362.5,302.675 407.5,299.75 452.5,284 520,108.5" fill="none" stroke="#a78bfa" stroke-width="2.5" stroke-linejoin="round"/>
+  <g fill="#a78bfa">
+    <circle cx="70" cy="54.5" r="4"/>
+    <circle cx="137.5" cy="254.75" r="4"/>
+    <circle cx="182.5" cy="295.25" r="4"/>
+    <circle cx="227.5" cy="299.975" r="4"/>
+    <circle cx="295" cy="304.25" r="4"/>
+    <circle cx="362.5" cy="302.675" r="4"/>
+    <circle cx="407.5" cy="299.75" r="4"/>
+    <circle cx="452.5" cy="284" r="4"/>
+    <circle cx="520" cy="108.5" r="4"/>
+  </g>
+  <text x="295" y="318" font-size="10" fill="currentColor" opacity="0.55" text-anchor="middle">baseline = 7.0</text>
+  <g font-size="11" fill="currentColor" opacity="0.7" text-anchor="end">
+    <text x="62" y="54">120</text>
+    <text x="62" y="121">90</text>
+    <text x="62" y="188">60</text>
+    <text x="62" y="256">30</text>
+    <text x="62" y="324">0</text>
+  </g>
+  <g font-size="11" fill="currentColor" opacity="0.7" text-anchor="middle">
+    <text x="70" y="340">-1.0</text>
+    <text x="182.5" y="340">-0.5</text>
+    <text x="295" y="340">0</text>
+    <text x="407.5" y="340">+0.5</text>
+    <text x="520" y="340">+1.0</text>
+  </g>
+  <text x="295" y="360" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">steering α (L24)</text>
+  <text transform="translate(22 185) rotate(-90)" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">median self-perplexity</text>
+  <text x="295" y="374" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.35">Kanana-1.5-2.1b-instruct, 10 prompts, greedy decode, L24</text>
+</svg>
+</figure>
 
 곡선이 비대칭이다. baseline (α=0) 의 ppl 은 7. **|α| ≤ 0.5 의 sweet spot** 에서는 ppl 이 11 이하로 유지되다가, |α| ≥ 0.7 부터 급격히 나빠져 |α|=1.0 에서는 13–17 배로 뛴다. fluency 가 α 에 대해 concave 한 전형적 steering 양상이다. 음의 방향이 더 예민한데, baseline 이 이미 존댓말 쪽에 붙어 있어 반말로 움직일 때 분포 이동 폭이 크기 때문이다.
 
