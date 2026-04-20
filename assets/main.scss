@@ -231,6 +231,35 @@ svg.blog-chart, figure.blog-chart svg {
   margin: 1.2em auto;
 }
 
+// ---------- Author bio (post footer) ----------
+.author-bio {
+  margin: 3.5em 0 1em;
+  padding: 1.3em 1.4em;
+  border-top: 1px solid $rule-light;
+  border-bottom: 1px solid $rule-light;
+  font-size: 0.95rem;
+  line-height: 1.65;
+
+  .author-bio-label {
+    font-family: $mono-font;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 0.35em;
+  }
+  .author-bio-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-bottom: 0.3em;
+  }
+  .author-bio-about {
+    margin: 0;
+    color: #4a5061;
+  }
+}
+
 // ===============================================================
 // Dark mode (prefers-color-scheme: dark) — minima skin:auto handles
 // body bg/fg already; we only retune our added surfaces.
@@ -276,4 +305,12 @@ svg.blog-chart, figure.blog-chart svg {
 
   .post-meta { color: #9aa3b2; }
   .post-list > li { border-bottom-color: $rule-dark; }
+
+  .author-bio {
+    border-top-color: $rule-dark;
+    border-bottom-color: $rule-dark;
+
+    .author-bio-label { color: #9aa3b2; }
+    .author-bio-about { color: #c6cad4; }
+  }
 }
