@@ -288,8 +288,6 @@ Kanana 에 chat template 을 씌워 **영어 사용자 prompt** 10 개 (task Q&A
 
 ### 4.4 Fluency (perplexity)
 
-![L24 median self-perplexity: α=0 에서 7, \|α\|≤0.5 에서 11 이하 유지, \|α\|=1.0 에서 94–118 로 cliff](/assets/images/2026-04-20-korean-honorifics-steering/perplexity_alpha.png)
-
 L24 median self-ppl:
 
 <figure class="blog-chart">
