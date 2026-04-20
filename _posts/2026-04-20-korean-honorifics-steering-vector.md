@@ -2,7 +2,7 @@
 layout: post
 title: "한국어 존댓말/반말 steering vector: Kanana-2.1B 의 단일 존댓말 축과 cross-lingual transfer"
 date: 2026-04-20 18:00:00 +0900
-categories: [research]
+categories: [llm-interp]
 tags: [mech-interp, steering-vectors, korean-llm, activation-engineering]
 excerpt: "Kakao kanana-1.5-2.1b-instruct 기준, 106쌍 minimal pair 의 diff-of-means direction 하나로 instruct 응답의 register 를 양방향 조절 — 영어에까지 transfer."
 lang: ko

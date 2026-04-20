@@ -13,6 +13,7 @@ minima:
   skin: auto
 
 header_pages:
+  - llm-interp.md
   - about.md
 
 plugins:
