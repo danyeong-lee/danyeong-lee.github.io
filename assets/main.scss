@@ -231,6 +231,39 @@ svg.blog-chart, figure.blog-chart svg {
   margin: 1.2em auto;
 }
 
+// ---------- Side-by-side figure row ----------
+// Two (or more) images placed beside each other. Breaks out of the 760px
+// wrapper on wide screens so heatmaps don't end up tiny.
+.figure-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 1.4em 0;
+
+  // Break out of the 760px wrapper on wide screens.
+  @media (min-width: 1100px) {
+    margin-left: calc((760px - 95vw) / 2);
+    margin-right: calc((760px - 95vw) / 2);
+    max-width: 95vw;
+  }
+  @media (min-width: 1400px) {
+    margin-left: calc((760px - 1280px) / 2);
+    margin-right: calc((760px - 1280px) / 2);
+    max-width: 1280px;
+  }
+
+  img {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: calc(50% - 6px);
+    margin: 0 !important;   // override .post-content img { margin: 1em auto }
+    display: block;
+    height: auto;
+  }
+}
+
 // ---------- Author bio (post footer) ----------
 .author-bio {
   margin: 3.5em 0 1em;
